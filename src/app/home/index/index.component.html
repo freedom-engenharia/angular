@@ -1,0 +1,40 @@
+<nav id="barraSuperior" class="navbar navbar-default">
+    <div class="container-fluid" style="display: contents">
+        <div class="navbar-header">
+            <a class="navbar-brand" routerLink="/index">
+                <p id="nomeLogo" style="display: contents; width: 80%">Freedom - Automação</p>
+            </a>
+        </div>
+        <span id="menu" class="pull-right" style="width: 20%; margin-right: 1%">
+            <button class="btn-group text-center" style="max-width: 3px" mat-button [matMenuTriggerFor]="menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" style="max-width: 3px !important">
+                <button mat-menu-item (click)="mudarTela('tela-inicial')">
+                    <mat-icon>home</mat-icon>Home
+                </button>
+                <a routerLink="/login"><button mat-menu-item>
+                        <mat-icon>exit_to_app</mat-icon>Sair
+                    </button>
+                </a>
+            </mat-menu>
+        </span>
+    </div>
+</nav>
+<div style="align-content: center">
+<mat-card *ngIf="!usuarioId">
+    <div class="text-center">
+        <span style="color: darkgreen">
+            <mat-icon>security</mat-icon>
+        </span>
+        <p>Faça o login para continuar..</p>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-info btn-md" style="margin-right: 10px; width: 30%" routerLink="/login">Login</button>
+        </div>
+    </div>
+</mat-card>
+</div>
+<mat-card>
+    <app-tela-inicial *ngIf="telaFilha == 'tela-inicial'"></app-tela-inicial>
+</mat-card>

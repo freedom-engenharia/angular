@@ -1,0 +1,16 @@
+.mat-fab.mat-accent, .mat-flat-button.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent{
+    font-size: 12;
+
+}
+
+#on{
+    background:rgba(39, 199, 33, 0.856);
+    color: aliceblue;
+    width: 100px;
+}
+
+#off{
+    background: rgb(25, 27, 25);
+    color: aliceblue;
+    width: 100px;
+}

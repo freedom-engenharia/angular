@@ -1,0 +1,170 @@
+<div class="row">
+  <div class="col-sm-3">
+  </div>
+  <div class="col-sm-6">
+
+    <mat-accordion *ngIf="usuarioId">
+      <mat-expansion-panel style="max-width: 600px" *ngFor="let item of listaDevices">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{item.id}} -
+          </mat-panel-title>
+          <mat-panel-description>
+            <b>{{item.id}}</b>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+          <div style="text-align: center" *ngIf="item.tipo == 0 || undefined">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            <b>Esperando resposta...</b>
+          </div>
+  
+        <!-- Configuração FreedomBoard tipo 1  ------------------------------------------------------------->
+
+        <div class="text-center" style="min-height: 300px">
+          <!-- temperatura e relés --->
+          <div class="text-center">
+            <div class="row">
+
+              <mat-list style="width: 100%">
+
+                <!-- temperatura--->
+                <mat-list-item>
+                  Temp: <i class="material-icons" style="color:rgb(127, 225, 255)">
+                    ac_unit
+                  </i><b>{{ item.sensor01[0]}} {{item.sensor01[1]}}</b> °C
+                </mat-list-item>
+
+                <mat-list-item>
+                  <div class="col-4">
+                    Relé 01
+                  </div>
+                  <div class="col-2">
+                    <div style="width: 100%">
+                      <span *ngIf="item.statusRele01 == 1" style="width: 40px;">
+                        <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                          flash_on
+                        </i>
+                      </span>
+                      <span *ngIf="item.statusRele01 == 0">
+                        <i class="material-icons" style="color: dimgray">
+                          flash_off
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6 text-center">
+                    <div style="width: 100%">
+                      <button mat-button id="on" *ngIf="item.statusRele01 == 1" (click)="ligaDesligaDevice(item.statusRele01 = 0, item)">Ligado</button>
+                      <button mat-button id="off" *ngIf="item.statusRele01 == 0" (click)="ligaDesligaDevice(item.statusRele01 = 1, item)">Desligado</button>
+                    </div>
+                  </div>
+                </mat-list-item>
+
+                <mat-list-item>
+                  <div class="col-4">
+                    Relé 02
+                  </div>
+                  <div class="col-2">
+                    <div style="width: 100%">
+                      <span *ngIf="item.statusRele02 == 1" style="width: 40px;">
+                        <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                          flash_on
+                        </i>
+                      </span>
+                      <span *ngIf="item.statusRele02 == 0">
+                        <i class="material-icons" style="color: dimgray">
+                          flash_off
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div style="width: 100%">
+                      <div style="width: 100%">
+                        <button mat-button id="on" *ngIf="item.statusRele02 == 1" (click)="ligaDesligaDevice(item.statusRele02 = 0, item)">Ligado</button>
+                        <button mat-button id="off" *ngIf="item.statusRele02 == 0" (click)="ligaDesligaDevice(item.statusRele02 = 1, item)">Desligado</button>
+                      </div>
+                    </div>
+                  </div>
+                </mat-list-item>
+
+                <mat-list-item>
+                  <div class="col-4">
+                    Relé 03
+                  </div>
+                  <div class="col-2">
+                    <div style="width: 100%">
+                      <span *ngIf="item.statusRele03 == 1" style="width: 40px;">
+                        <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                          flash_on
+                        </i>
+                      </span>
+                      <span *ngIf="item.statusRele03 == 0">
+                        <i class="material-icons" style="color: dimgray">
+                          flash_off
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div style="width: 100%">
+                      <button mat-button id="on" *ngIf="item.statusRele03 == 1" (click)="ligaDesligaDevice(item.statusRele03 = 0, item)">Ligado</button>
+                      <button mat-button id="off" *ngIf="item.statusRele03 == 0" (click)="ligaDesligaDevice(item.statusRele03 = 1, item)">Desligado</button>
+                    </div>
+                  </div>
+                </mat-list-item>
+
+                <mat-list-item>
+                  <div class="col-4">
+                    Relé 04
+                  </div>
+                  <div class="col-2">
+                    <div style="width: 100%">
+                      <span *ngIf="item.statusRele04 == 1" style="width: 40px;">
+                        <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                          flash_on
+                        </i>
+                      </span>
+                      <span *ngIf="item.statusRele04 == 0">
+                        <i class="material-icons" style="color: dimgray">
+                          flash_off
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div style="width: 100%">
+                      <button mat-button id="on" *ngIf="item.statusRele04 == 1" (click)="ligaDesligaDevice(item.statusRele04 = 0, item)">Ligado</button>
+                      <button mat-button id="off" *ngIf="item.statusRele04 == 0" (click)="ligaDesligaDevice(item.statusRele04 = 1, item)">Desligado</button>
+                    </div>
+                  </div>
+                </mat-list-item>
+
+
+              </mat-list>
+
+
+
+            </div>
+          </div>
+          <!-- relés fim--->
+
+          <!-- Pinos --->
+          <div>
+            <mat-list>
+
+            </mat-list>
+
+          </div>
+
+        </div>
+
+        <!-- Fim Configuração FreedomBoard tipo 2  -->
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </div>
+  <div class="col-sm-3">
+  </div>
+</div>

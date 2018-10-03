@@ -7,6 +7,8 @@ import { DeviceService } from '../../servicos/device.servico';
 import { FreedomBoard } from '../../modelos/freedomDoardTipo01.modelo';
 import { environment } from '../../../environments/environment';
 import * as _ from "lodash";
+import { MatDialog } from '@angular/material';
+import { ModalComponent } from './modal/modal.component';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -27,13 +29,13 @@ export class TelaInicialComponent implements OnInit {
   public objetoRecebido: DeviceModelo;
 
   constructor(
+    public dialog: MatDialog,
     private _mqttService: MqttService,
     private deviceServico: DeviceService,
   ) {
     this.statusSolicitado = false;
 
     this.listaDevices = [];
-
 
     this.listaDevices = EntityFactoryService.createMany(FreedomBoard, this.listaDevices);
 
@@ -42,8 +44,8 @@ export class TelaInicialComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioId = environment.usuarioId;
-    this.getDevicesByUsuarioId(this.usuarioId);
   }
+
 
   getDevicesByUsuarioId(usuarioId: string) {
     this.devices = this.deviceServico.getDevicesByUserId(usuarioId);
@@ -55,18 +57,14 @@ export class TelaInicialComponent implements OnInit {
     for (i = 0; i < this.listaDevices.length; i++) {
       if (this.listaDevices[i].id == device.id) {
         this.listaDevices[i].tipo = 0;
+        
       }
     }
     this.publicaEmTopico(device.topicoUpdateDevice, device);
     console.log(device.topicoUpdateDevice, device);
   }
 
-
-
-
-
   getAllStatus(topicoRespostaDoDevice: string, topicoEscutaDoDevice: string) {
-    //this.escutaTopicoEdefineOObjetoRecebido(topicoRespostaDoDevice);
     this.publicaEmTopico(topicoEscutaDoDevice, 'GETALL')
   }
 
@@ -84,7 +82,6 @@ export class TelaInicialComponent implements OnInit {
   }
 
   publicaEmTopico(topico: string, menssagem: any) {
-    debugger;
     this._mqttService.unsafePublish(topico, JSON.stringify(menssagem), { qos: 1, retain: true });
   }
 
@@ -102,16 +99,25 @@ export class TelaInicialComponent implements OnInit {
         this.listaDevices[i].statusRele03 = objeto.statusRele03;
         this.listaDevices[i].statusRele04 = objeto.statusRele04;
 
-        console.log("A lista já tem o obj");
       }
       if (this.listaDevices[i].id !== objeto.id) {
         let existeDeviceNalista = this.listaDevices.filter(x => x.id == objeto.id)
         if (!existeDeviceNalista.length) {
           this.listaDevices = _.concat(this.listaDevices, objeto);
-          console.log("A lista não tem o obj");
         }
       }
     }
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '250px',
+      data: 'modal'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
 
 }

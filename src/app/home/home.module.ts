@@ -4,6 +4,7 @@ import { IndexComponent } from './index/index.component';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { routing } from '../app.routing';
 import { CompartilhadoModule } from '../compartilhado/compartilhado.module';
+import { ModalComponent } from './tela-inicial/modal/modal.component';
 
 @NgModule({
   imports: [
@@ -11,8 +12,8 @@ import { CompartilhadoModule } from '../compartilhado/compartilhado.module';
     routing,
     CompartilhadoModule
   ],
-  declarations: [IndexComponent, TelaInicialComponent, ],
+  declarations: [IndexComponent, TelaInicialComponent, ModalComponent, ],
   exports: [IndexComponent],
-  entryComponents: [TelaInicialComponent, ]
+  entryComponents: [TelaInicialComponent, ModalComponent]
 })
 export class HomeModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
 import { Subscription } from 'rxjs';
 import { DeviceModelo } from '../../modelos/device.modelo';
@@ -15,7 +15,7 @@ import { ModalComponent } from './modal/modal.component';
   templateUrl: './tela-inicial.component.html',
   styleUrls: ['./tela-inicial.component.css']
 })
-export class TelaInicialComponent implements OnInit {
+export class TelaInicialComponent implements OnInit, OnDestroy  {
 
   listaDevices: FreedomBoard[]
   freedomBoardModel: FreedomBoard;
@@ -119,5 +119,8 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  public ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
 }

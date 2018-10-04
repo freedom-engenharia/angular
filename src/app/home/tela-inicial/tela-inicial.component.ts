@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { DeviceModelo } from '../../modelos/device.modelo';
 import { EntityFactoryService } from '../../servicos/entity-factory.service';
 import { DeviceService } from '../../servicos/device.servico';
-import { FreedomBoard } from '../../modelos/freedomDoardTipo01.modelo';
+import { FreedomBoard } from '../../modelos/freedomDoard.modelo';
 import { environment } from '../../../environments/environment';
 import * as _ from "lodash";
 import { MatDialog } from '@angular/material';

@@ -61,7 +61,7 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
 
       }
     }
-    debugger;
+
     this.publicaEmTopico(device.topicoUpdateDevice, this.freedomBoardModelUpdate);
     console.log(device.topicoUpdateDevice, this.freedomBoardModelUpdate);
   }
@@ -95,7 +95,6 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
         this.listaDevices[i].dataUltimaModificacao = objeto.dataUltimaModificacao;
         this.listaDevices[i].ledPlaca = objeto.ledPlaca;
         this.listaDevices[i].sensor01 = objeto.sensor01;
-        this.listaDevices[i].statusDevice = objeto.statusDevice;
         this.listaDevices[i].statusRele01 = objeto.statusRele01;
         this.listaDevices[i].statusRele02 = objeto.statusRele02;
         this.listaDevices[i].statusRele03 = objeto.statusRele03;

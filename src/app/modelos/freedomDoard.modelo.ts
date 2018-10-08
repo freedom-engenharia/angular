@@ -3,8 +3,7 @@ import { DeviceModelo } from "./device.modelo";
 export class FreedomBoard {
     id: string
     tipo: number;
-    ledPlaca: string
-    statusDevice: string;
+    ledPlaca: number
     dataUltimaModificacao: string;
     statusRele01: number;
     statusRele02: number;
@@ -17,8 +16,7 @@ export class FreedomBoard {
 
         this.tipo ? entity.tipo : 0;
         this.id = entity ? entity.id : '';
-        this.ledPlaca ? entity.ledPlaca : '';
-        this.statusDevice ? entity.statusDevice : '';
+        this.ledPlaca ? entity.ledPlaca : 0;
         this.statusRele01 ? entity.statusRele01 : 0;
         this.statusRele02 ? entity.statusRele02 : 0;
         this.statusRele03 ? entity.statusRele03 : 0;

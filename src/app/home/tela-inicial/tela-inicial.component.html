@@ -43,12 +43,12 @@
                   </div>
                   <div class="col-2">
                     <div style="width: 100%">
-                      <span *ngIf="item.ledPlaca == 1" style="width: 40px;">
+                      <span *ngIf="item.ledPlaca == 0 " style="width: 40px;">
                         <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
                           flash_on
                         </i>
                       </span>
-                      <span *ngIf="item.ledPlaca == 0">
+                      <span *ngIf="item.ledPlaca == 1 ">
                         <i class="material-icons" style="color: dimgray">
                           flash_off
                         </i>
@@ -56,9 +56,9 @@
                     </div>
                   </div>
                   <div class="col-6 text-center">
-                    <div style="width: 100%">
-                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.ledPlaca == 1" (click)="ligaDesligaDevice(item.ledPlaca = 0, item)">Ligado</button>
-                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.ledPlaca == 0" (click)="ligaDesligaDevice(item.ledPlaca = 1, item)">Desligado</button>
+                    <div style="width: 100%">     
+                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.ledPlaca == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.ledPlaca = 1)">Ligado</button>
+                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.ledPlaca == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.ledPlaca = 0)">Desligado</button>
                     </div>
                   </div>
                 </mat-list-item>

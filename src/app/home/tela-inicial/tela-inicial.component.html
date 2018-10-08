@@ -83,8 +83,8 @@
                   </div>
                   <div class="col-6 text-center">
                     <div style="width: 100%">
-                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele01 == 1" (click)="ligaDesligaDevice(item.statusRele01 = 0, item)">Ligado</button>
-                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele01 == 0" (click)="ligaDesligaDevice(item.statusRele01 = 1, item)">Desligado</button>
+                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele01 == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele01 = 0)">Ligado</button>
+                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele01 == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele01 = 1)">Desligado</button>
                     </div>
                   </div>
                 </mat-list-item>
@@ -110,8 +110,8 @@
                   <div class="col-6">
                     <div style="width: 100%">
                       <div style="width: 100%">
-                        <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele02 == 1" (click)="ligaDesligaDevice(item.statusRele02 = 0, item)">Ligado</button>
-                        <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele02 == 0" (click)="ligaDesligaDevice(item.statusRele02 = 1, item)">Desligado</button>
+                        <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele02 == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele02 = 0)">Ligado</button>
+                        <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele02 == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele02 = 1)">Desligado</button>
                       </div>
                     </div>
                   </div>
@@ -137,8 +137,8 @@
                   </div>
                   <div class="col-6">
                     <div style="width: 100%">
-                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele03 == 1" (click)="ligaDesligaDevice(item.statusRele03 = 0, item)">Ligado</button>
-                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele03 == 0" (click)="ligaDesligaDevice(item.statusRele03 = 1, item)">Desligado</button>
+                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele03 == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele03 = 0)">Ligado</button>
+                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele03 == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele03 = 1)">Desligado</button>
                     </div>
                   </div>
                 </mat-list-item>
@@ -163,8 +163,8 @@
                   </div>
                   <div class="col-6">
                     <div style="width: 100%">
-                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele04 == 1" (click)="ligaDesligaDevice(item.statusRele04 = 0, item)">Ligado</button>
-                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele04 == 0" (click)="ligaDesligaDevice(item.statusRele04 = 1, item)">Desligado</button>
+                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele04 == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele04 = 0)">Ligado</button>
+                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele04 == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele04 = 1)">Desligado</button>
                     </div>
                   </div>
                 </mat-list-item>

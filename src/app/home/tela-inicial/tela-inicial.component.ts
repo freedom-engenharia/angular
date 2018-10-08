@@ -15,10 +15,11 @@ import { ModalComponent } from './modal/modal.component';
   templateUrl: './tela-inicial.component.html',
   styleUrls: ['./tela-inicial.component.css']
 })
-export class TelaInicialComponent implements OnInit, OnDestroy  {
+export class TelaInicialComponent implements OnInit, OnDestroy {
 
   listaDevices: FreedomBoard[]
   freedomBoardModel: FreedomBoard;
+  freedomBoardModelUpdate: FreedomBoard;
   deviceSelecionado: DeviceModelo;
   devices: DeviceModelo[];
   usuarioId: string;
@@ -51,17 +52,18 @@ export class TelaInicialComponent implements OnInit, OnDestroy  {
     this.devices = this.deviceServico.getDevicesByUserId(usuarioId);
   }
 
-  ligaDesligaDevice(status: any, device: FreedomBoard) {
+  ligaDesligaDevice(device: FreedomBoard, status: any) {
 
     let i: number;
     for (i = 0; i < this.listaDevices.length; i++) {
       if (this.listaDevices[i].id == device.id) {
         this.listaDevices[i].tipo = 0;
-        
+
       }
     }
-    this.publicaEmTopico(device.topicoUpdateDevice, device);
-    console.log(device.topicoUpdateDevice, device);
+    debugger;
+    this.publicaEmTopico(device.topicoUpdateDevice, this.freedomBoardModelUpdate);
+    console.log(device.topicoUpdateDevice, this.freedomBoardModelUpdate);
   }
 
   getAllStatus(topicoRespostaDoDevice: string, topicoEscutaDoDevice: string) {
@@ -73,7 +75,7 @@ export class TelaInicialComponent implements OnInit, OnDestroy  {
     this.subscription = this._mqttService.observe(topico).subscribe((menssagem: IMqttMessage) => {
 
       let obj = JSON.parse(menssagem.payload.toString());
-
+      
       if (!this.listaDevices.length) {
         this.listaDevices = _.concat(this.listaDevices, obj);
       }

@@ -94,6 +94,7 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
         this.listaDevices[i].tipo = objeto.tipo;
         this.listaDevices[i].dataUltimaModificacao = objeto.dataUltimaModificacao;
         this.listaDevices[i].ledPlaca = objeto.ledPlaca;
+        this.listaDevices[i].nome = objeto.nome;
         this.listaDevices[i].sensor01 = objeto.sensor01;
         this.listaDevices[i].statusRele01 = objeto.statusRele01;
         this.listaDevices[i].statusRele02 = objeto.statusRele02;

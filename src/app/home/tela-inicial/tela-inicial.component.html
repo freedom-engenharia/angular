@@ -1,16 +1,16 @@
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-sm-2">
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-8">
 
     <mat-accordion *ngIf="usuarioId">
-      <mat-expansion-panel style="max-width: 600px" *ngFor="let item of listaDevices">
+      <mat-expansion-panel *ngFor="let item of listaDevices">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{item.id}} -
           </mat-panel-title>
           <mat-panel-description>
-            <b>{{item.id}}</b>
+            <b>{{item.nome}}</b>
           </mat-panel-description>
         </mat-expansion-panel-header>
 
@@ -193,6 +193,6 @@
     </mat-accordion>
 
   </div>
-  <div class="col-sm-3">
+  <div class="col-sm-2">
   </div>
 </div>

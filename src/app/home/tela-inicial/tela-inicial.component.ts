@@ -79,6 +79,7 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
       if (!this.listaDevices.length) {
         this.listaDevices = _.concat(this.listaDevices, obj);
       }
+      console.log("Json recebido: ->>>  ", obj);
       this.atualizaDeviceNalista(obj);
     });
   }
@@ -88,6 +89,7 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
   }
 
   atualizaDeviceNalista(objeto: FreedomBoard) {
+    
     let i: number;
     for (i = 0; i < this.listaDevices.length; i++) {
       if (this.listaDevices[i].id == objeto.id) {

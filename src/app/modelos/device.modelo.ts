@@ -1,10 +1,8 @@
 export class DeviceModelo {
-    tipo: number
+    tipo: string
     nome: string;
     id: string
-    subLocal: string;
-    usuarioId: string;
-    statusDevice: string
+    subLocalId: string;
     topicoMQTTResposta: string;
     topicoMQTTEscutaGetAll: string;
     topicoMQTTEscutaUpdate: string;

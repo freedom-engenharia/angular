@@ -3,11 +3,11 @@
   </div>
   <div class="col-sm-8">
 
-    <mat-accordion *ngIf="usuarioId">
-      <mat-expansion-panel *ngFor="let item of listaDevices">
+    <mat-accordion *ngIf="usuarioId" multi="true" >
+      <mat-expansion-panel *ngFor="let item of listaDevices" expanded="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{item.id}} -
+            Local
           </mat-panel-title>
           <mat-panel-description>
             <b>{{item.nome}}</b>
@@ -16,160 +16,200 @@
 
         <!-- Configuração FreedomBoard tipo 1  ------------------------------------------------------------->
 
-        <div class="text-center" style="min-height: 300px">
+        <div class="text-center">
           <!-- temperatura e relés --->
           <div class="text-center">
             <div class="row">
 
               <mat-list style="width: 100%">
-
                 <div style="min-height: 10px">
-                  <div style="text-align: center; max-height: 10px" *ngIf="item.tipo == 0 || undefined">
+                  <div style="text-align: center; max-height: 10px" *ngIf="item.tipo == 'FB01UPDATE' || item.tipo == 'S1RUPDATE'">
                     <b>Aguardando resposta...</b>
                     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                   </div>
                 </div>
 
                 <!-- temperatura--->
-                <mat-list-item>
-                  Temp: <i class="material-icons" style="color:rgb(127, 225, 255)">
-                    ac_unit
-                  </i><b>{{ item.sensor01[0]}} {{item.sensor01[1]}}</b> °C
-                </mat-list-item>
+                <span *ngIf="item.tipo == 'FB01' || item.tipo == 'FB01UPDATE'">
+                  <mat-list-item>
+                    Temp: <i class="material-icons" style="color:rgb(127, 225, 255)">
+                      ac_unit
+                    </i><b>{{ item.sensor01[0]}} {{item.sensor01[1]}}</b> °C
+                  </mat-list-item>
 
-                <mat-list-item>
-                  <div class="col-4">
-                    Led Placa
-                  </div>
-                  <div class="col-2">
-                    <div style="width: 100%">
-                      <span *ngIf="item.ledPlaca == 0 " style="width: 40px;">
-                        <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
-                          flash_on
-                        </i>
-                      </span>
-                      <span *ngIf="item.ledPlaca == 1 ">
-                        <i class="material-icons" style="color: dimgray">
-                          flash_off
-                        </i>
-                      </span>
+                  <mat-list-item>
+                    <div class="col-4">
+                      Led Placa
                     </div>
-                  </div>
-                  <div class="col-6 text-center">
-                    <div style="width: 100%">     
-                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.ledPlaca == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.ledPlaca = 1)">Ligado</button>
-                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.ledPlaca == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.ledPlaca = 0)">Desligado</button>
-                    </div>
-                  </div>
-                </mat-list-item>
-
-                <mat-list-item>
-                  <div class="col-4">
-                    Relé 01
-                  </div>
-                  <div class="col-2">
-                    <div style="width: 100%">
-                      <span *ngIf="item.statusRele01 == 1" style="width: 40px;">
-                        <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
-                          flash_on
-                        </i>
-                      </span>
-                      <span *ngIf="item.statusRele01 == 0">
-                        <i class="material-icons" style="color: dimgray">
-                          flash_off
-                        </i>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="col-6 text-center">
-                    <div style="width: 100%">
-                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele01 == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele01 = 0)">Ligado</button>
-                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele01 == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele01 = 1)">Desligado</button>
-                    </div>
-                  </div>
-                </mat-list-item>
-
-                <mat-list-item>
-                  <div class="col-4">
-                    Relé 02
-                  </div>
-                  <div class="col-2">
-                    <div style="width: 100%">
-                      <span *ngIf="item.statusRele02 == 1" style="width: 40px;">
-                        <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
-                          flash_on
-                        </i>
-                      </span>
-                      <span *ngIf="item.statusRele02 == 0">
-                        <i class="material-icons" style="color: dimgray">
-                          flash_off
-                        </i>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div style="width: 100%">
+                    <div class="col-2">
                       <div style="width: 100%">
-                        <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele02 == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele02 = 0)">Ligado</button>
-                        <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele02 == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele02 = 1)">Desligado</button>
+                        <span *ngIf="item.ledPlaca == 0 " style="width: 40px;">
+                          <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                            flash_on
+                          </i>
+                        </span>
+                        <span *ngIf="item.ledPlaca == 1 ">
+                          <i class="material-icons" style="color: dimgray">
+                            flash_off
+                          </i>
+                        </span>
                       </div>
                     </div>
-                  </div>
-                </mat-list-item>
-
-                <mat-list-item>
-                  <div class="col-4">
-                    Relé 03
-                  </div>
-                  <div class="col-2">
-                    <div style="width: 100%">
-                      <span *ngIf="item.statusRele03 == 1" style="width: 40px;">
-                        <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
-                          flash_on
-                        </i>
-                      </span>
-                      <span *ngIf="item.statusRele03 == 0">
-                        <i class="material-icons" style="color: dimgray">
-                          flash_off
-                        </i>
-                      </span>
+                    <div class="col-6 text-center">
+                      <div style="width: 100%">
+                        <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="on" *ngIf="item.ledPlaca == 0"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.ledPlaca = 1)">Ligado</button>
+                        <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="off" *ngIf="item.ledPlaca == 1"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.ledPlaca = 0)">Desligado</button>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-6">
-                    <div style="width: 100%">
-                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele03 == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele03 = 0)">Ligado</button>
-                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele03 == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele03 = 1)">Desligado</button>
-                    </div>
-                  </div>
-                </mat-list-item>
+                  </mat-list-item>
 
-                <mat-list-item>
-                  <div class="col-4">
-                    Relé 04
-                  </div>
-                  <div class="col-2">
-                    <div style="width: 100%">
-                      <span *ngIf="item.statusRele04 == 1" style="width: 40px;">
-                        <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
-                          flash_on
-                        </i>
-                      </span>
-                      <span *ngIf="item.statusRele04 == 0">
-                        <i class="material-icons" style="color: dimgray">
-                          flash_off
-                        </i>
-                      </span>
+                  <mat-list-item>
+                    <div class="col-4">
+                      Relé 01
                     </div>
-                  </div>
-                  <div class="col-6">
-                    <div style="width: 100%">
-                      <button [disabled]="item.tipo == 0" mat-button id="on" *ngIf="item.statusRele04 == 1" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele04 = 0)">Ligado</button>
-                      <button [disabled]="item.tipo == 0" mat-button id="off" *ngIf="item.statusRele04 == 0" (click)="ligaDesligaDevice(freedomBoardModelUpdate = item, freedomBoardModelUpdate.statusRele04 = 1)">Desligado</button>
+                    <div class="col-2">
+                      <div style="width: 100%">
+                        <span *ngIf="item.statusRele01 == 1" style="width: 40px;">
+                          <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                            flash_on
+                          </i>
+                        </span>
+                        <span *ngIf="item.statusRele01 == 0">
+                          <i class="material-icons" style="color: dimgray">
+                            flash_off
+                          </i>
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </mat-list-item>
+                    <div class="col-6 text-center">
+                      <div style="width: 100%">
+                        <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="on" *ngIf="item.statusRele01 == 1"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele01 = 0)">Ligado</button>
+                        <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="off" *ngIf="item.statusRele01 == 0"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele01 = 1)">Desligado</button>
+                      </div>
+                    </div>
+                  </mat-list-item>
 
+                  <mat-list-item>
+                    <div class="col-4">
+                      Relé 02
+                    </div>
+                    <div class="col-2">
+                      <div style="width: 100%">
+                        <span *ngIf="item.statusRele02 == 1" style="width: 40px;">
+                          <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                            flash_on
+                          </i>
+                        </span>
+                        <span *ngIf="item.statusRele02 == 0">
+                          <i class="material-icons" style="color: dimgray">
+                            flash_off
+                          </i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div style="width: 100%">
+                        <div style="width: 100%">
+                          <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="on" *ngIf="item.statusRele02 == 1"
+                            (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele02 = 0)">Ligado</button>
+                          <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="off" *ngIf="item.statusRele02 == 0"
+                            (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele02 = 1)">Desligado</button>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-list-item>
 
+                  <mat-list-item>
+                    <div class="col-4">
+                      Relé 03
+                    </div>
+                    <div class="col-2">
+                      <div style="width: 100%">
+                        <span *ngIf="item.statusRele03 == 1" style="width: 40px;">
+                          <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                            flash_on
+                          </i>
+                        </span>
+                        <span *ngIf="item.statusRele03 == 0">
+                          <i class="material-icons" style="color: dimgray">
+                            flash_off
+                          </i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div style="width: 100%">
+                        <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="on" *ngIf="item.statusRele03 == 1"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele03 = 0)">Ligado</button>
+                        <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="off" *ngIf="item.statusRele03 == 0"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele03 = 1)">Desligado</button>
+                      </div>
+                    </div>
+                  </mat-list-item>
+
+                  <mat-list-item>
+                    <div class="col-4">
+                      Relé 04
+                    </div>
+                    <div class="col-2">
+                      <div style="width: 100%">
+                        <span *ngIf="item.statusRele04 == 1" style="width: 40px;">
+                          <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                            flash_on
+                          </i>
+                        </span>
+                        <span *ngIf="item.statusRele04 == 0">
+                          <i class="material-icons" style="color: dimgray">
+                            flash_off
+                          </i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div style="width: 100%">
+                        <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="on" *ngIf="item.statusRele04 == 1"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele04 = 0)">Ligado</button>
+                        <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="off" *ngIf="item.statusRele04 == 0"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele04 = 1)">Desligado</button>
+                      </div>
+                    </div>
+                  </mat-list-item>
+                </span>
+
+                <span *ngIf="item.tipo == 'S1R' || item.tipo == 'S1RUPDATE'">
+                  <br>
+                  <mat-list-item>
+                    <div class="col-4">
+                      Relé
+                    </div>
+                    <div class="col-2">
+                      <div style="width: 100%">
+                        <span *ngIf="item.statusRele == 1 " style="width: 40px;">
+                          <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
+                            flash_on
+                          </i>
+                        </span>
+                        <span *ngIf="item.statusRele == 0 ">
+                          <i class="material-icons" style="color: dimgray">
+                            flash_off
+                          </i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6 text-center">
+                      <div style="width: 100%">
+                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="on" *ngIf="item.statusRele == 1"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 0)">Ligado</button>
+                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="off" *ngIf="item.statusRele == 0"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 1)">Desligado</button>
+                      </div>
+                    </div>
+                  </mat-list-item>
+                </span>
               </mat-list>
 
 

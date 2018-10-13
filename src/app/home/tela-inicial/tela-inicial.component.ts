@@ -17,9 +17,9 @@ import { ModalComponent } from './modal/modal.component';
 })
 export class TelaInicialComponent implements OnInit, OnDestroy {
 
-  listaDevices: FreedomBoard[]
+  listaDevices: any[]
   freedomBoardModel: FreedomBoard;
-  freedomBoardModelUpdate: FreedomBoard;
+  objetoUpdate: any;
   deviceSelecionado: DeviceModelo;
   devices: DeviceModelo[];
   usuarioId: string;
@@ -38,9 +38,7 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
 
     this.listaDevices = [];
 
-    this.listaDevices = EntityFactoryService.createMany(FreedomBoard, this.listaDevices);
-
-    this.escutaTopico("FREEDOMBOARD/RESPOSTA/GETALL/ANGULAR");
+    this.escutaTopico("FREEDOM/RESPOSTA/GETALL/ANGULAR");
   }
 
   ngOnInit() {
@@ -48,22 +46,23 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
   }
 
 
-  getDevicesByUsuarioId(usuarioId: string) {
-    this.devices = this.deviceServico.getDevicesByUserId(usuarioId);
-  }
 
   ligaDesligaDevice(device: FreedomBoard, status: any) {
-
     let i: number;
     for (i = 0; i < this.listaDevices.length; i++) {
       if (this.listaDevices[i].id == device.id) {
-        this.listaDevices[i].tipo = 0;
+        if (this.listaDevices[i].tipo == 'FB01') {
+          this.listaDevices[i].tipo = 'FB01UPDATE';
+        }
+        if (this.listaDevices[i].tipo == 'S1R') {
+          this.listaDevices[i].tipo = 'S1RUPDATE';
+        }
 
       }
     }
 
-    this.publicaEmTopico(device.topicoUpdateDevice, this.freedomBoardModelUpdate);
-    console.log(device.topicoUpdateDevice, this.freedomBoardModelUpdate);
+    this.publicaEmTopico(device.topicoMQTTEscutaUpdate, this.objetoUpdate);
+    console.log(device.topicoMQTTEscutaUpdate, this.objetoUpdate);
   }
 
   getAllStatus(topicoRespostaDoDevice: string, topicoEscutaDoDevice: string) {
@@ -75,12 +74,13 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
     this.subscription = this._mqttService.observe(topico).subscribe((menssagem: IMqttMessage) => {
 
       let obj = JSON.parse(menssagem.payload.toString());
-      
+
       if (!this.listaDevices.length) {
         this.listaDevices = _.concat(this.listaDevices, obj);
       }
       console.log("Json recebido: ->>>  ", obj);
       this.atualizaDeviceNalista(obj);
+      console.log(this.listaDevices);
     });
   }
 
@@ -88,29 +88,48 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
     this._mqttService.unsafePublish(topico, JSON.stringify(menssagem), { qos: 1, retain: true });
   }
 
-  atualizaDeviceNalista(objeto: FreedomBoard) {
-    
-    let i: number;
-    for (i = 0; i < this.listaDevices.length; i++) {
-      if (this.listaDevices[i].id == objeto.id) {
-        this.listaDevices[i].tipo = objeto.tipo;
-        this.listaDevices[i].dataUltimaModificacao = objeto.dataUltimaModificacao;
-        this.listaDevices[i].ledPlaca = objeto.ledPlaca;
-        this.listaDevices[i].nome = objeto.nome;
-        this.listaDevices[i].sensor01 = objeto.sensor01;
-        this.listaDevices[i].statusRele01 = objeto.statusRele01;
-        this.listaDevices[i].statusRele02 = objeto.statusRele02;
-        this.listaDevices[i].statusRele03 = objeto.statusRele03;
-        this.listaDevices[i].statusRele04 = objeto.statusRele04;
+  atualizaDeviceNalista(objeto: any) {
 
-      }
-      if (this.listaDevices[i].id !== objeto.id) {
-        let existeDeviceNalista = this.listaDevices.filter(x => x.id == objeto.id)
-        if (!existeDeviceNalista.length) {
-          this.listaDevices = _.concat(this.listaDevices, objeto);
+    let i: number;
+    if (objeto.tipo == 'FB01') {
+      for (i = 0; i < this.listaDevices.length; i++) {
+        if (this.listaDevices[i].id == objeto.id) {
+          this.listaDevices[i].tipo = objeto.tipo;
+          this.listaDevices[i].ledPlaca = objeto.ledPlaca;
+          this.listaDevices[i].nome = objeto.nome;
+          this.listaDevices[i].sensor01 = objeto.sensor01;
+          this.listaDevices[i].statusRele01 = objeto.statusRele01;
+          this.listaDevices[i].statusRele02 = objeto.statusRele02;
+          this.listaDevices[i].statusRele03 = objeto.statusRele03;
+          this.listaDevices[i].statusRele04 = objeto.statusRele04;
+
+        }
+        if (this.listaDevices[i].id !== objeto.id) {
+          let existeDeviceNalista = this.listaDevices.filter(x => x.id == objeto.id)
+          if (!existeDeviceNalista.length) {
+            this.listaDevices = _.concat(this.listaDevices, objeto);
+          }
         }
       }
     }
+    if (objeto.tipo == 'S1R') {
+      for (i = 0; i < this.listaDevices.length; i++) {
+        if (this.listaDevices[i].id == objeto.id) {
+          this.listaDevices[i].tipo = objeto.tipo;
+          this.listaDevices[i].statusLedPlaca = objeto.statusLedPlaca;
+          this.listaDevices[i].nome = objeto.nome;
+          this.listaDevices[i].statusRele = objeto.statusRele;
+
+        }
+        if (this.listaDevices[i].id !== objeto.id) {
+          let existeDeviceNalista = this.listaDevices.filter(x => x.id == objeto.id)
+          if (!existeDeviceNalista.length) {
+            this.listaDevices = _.concat(this.listaDevices, objeto);
+          }
+        }
+      }
+    }
+
   }
 
   openDialog(): void {

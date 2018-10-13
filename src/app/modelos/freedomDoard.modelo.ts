@@ -1,21 +1,16 @@
 import { DeviceModelo } from "./device.modelo";
 
-export class FreedomBoard {
-    id: string
-    tipo: number;
+export class FreedomBoard extends DeviceModelo {
     ledPlaca: number;
-    nome: string;
-    dataUltimaModificacao: string;
     statusRele01: number;
     statusRele02: number;
     statusRele03: number;
     statusRele04: number;
     sensor01: [string, string];
-    topicoUpdateDevice: string;
 
     constructor(entity?: FreedomBoard) {
-
-        this.tipo ? entity.tipo : 0;
+        super();
+        this.tipo ? entity.tipo : '';
         this.id = entity ? entity.id : '';
         this.ledPlaca ? entity.ledPlaca : 0;
         this.nome ? entity.nome : '';
@@ -24,6 +19,6 @@ export class FreedomBoard {
         this.statusRele03 ? entity.statusRele03 : 0;
         this.statusRele04 ? entity.statusRele04 : 0;
         this.sensor01 ? entity.sensor01 : [];
-        this.topicoUpdateDevice ? entity.topicoUpdateDevice : '';
+        this.topicoMQTTEscutaUpdate ? entity.topicoMQTTEscutaUpdate : '';
     }
 }

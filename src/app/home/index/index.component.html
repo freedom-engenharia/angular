@@ -2,7 +2,7 @@
     <div class="container-fluid" style="display: contents">
         <div class="navbar-header">
             <a class="navbar-brand" routerLink="/index">
-                <p id="nomeLogo" style="display: contents; width: 80%">Freedom - Automação</p>
+                <p *ngIf="usuarioLogado" id="nomeLogo" style="font-size: 16px; display: contents; width: 80%">Bem-vindo, {{ usuarioLogado.nome }}</p>
             </a>
         </div>
         <span id="menu" class="pull-right" style="width: 20%; margin-right: 1%">
@@ -21,6 +21,7 @@
         </span>
     </div>
 </nav>
+
 <div style="align-content: center">
 <mat-card *ngIf="!usuarioId">
     <div class="text-center">

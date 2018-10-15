@@ -5,9 +5,9 @@
 
     <mat-accordion *ngIf="usuarioId" multi="true" >
       <mat-expansion-panel *ngFor="let item of listaDevices" expanded="true">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header >
           <mat-panel-title>
-            Local
+            ---
           </mat-panel-title>
           <mat-panel-description>
             <b>{{item.nome}}</b>
@@ -24,15 +24,15 @@
               <mat-list style="width: 100%">
                 <div style="min-height: 10px">
                   <div style="text-align: center; max-height: 10px" *ngIf="item.tipo == 'FB01UPDATE' || item.tipo == 'S1RUPDATE'">
-                    <b>Aguardando resposta...</b>
                     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    <b>Aguardando resposta...</b>
                   </div>
                 </div>
 
                 <!-- temperatura--->
                 <span *ngIf="item.tipo == 'FB01' || item.tipo == 'FB01UPDATE'">
                   <mat-list-item>
-                    Temp: <i class="material-icons" style="color:rgb(127, 225, 255)">
+                    Temp: <i class="material-icons" style=" color:rgb(127, 225, 255)">
                       ac_unit
                     </i><b>{{ item.sensor01[0]}} {{item.sensor01[1]}}</b> °C
                   </mat-list-item>
@@ -188,12 +188,12 @@
                     </div>
                     <div class="col-2">
                       <div style="width: 100%">
-                        <span *ngIf="item.statusRele == 1 " style="width: 40px;">
+                        <span *ngIf="item.statusRele == 0 " style="width: 40px;">
                           <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
                             flash_on
                           </i>
                         </span>
-                        <span *ngIf="item.statusRele == 0 ">
+                        <span *ngIf="item.statusRele == 1 ">
                           <i class="material-icons" style="color: dimgray">
                             flash_off
                           </i>
@@ -202,10 +202,10 @@
                     </div>
                     <div class="col-6 text-center">
                       <div style="width: 100%">
-                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="on" *ngIf="item.statusRele == 1"
-                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 0)">Ligado</button>
-                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="off" *ngIf="item.statusRele == 0"
-                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 1)">Desligado</button>
+                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="on" *ngIf="item.statusRele == 0"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 1)">Ligado</button>
+                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="off" *ngIf="item.statusRele == 1"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 0)">Desligado</button>
                       </div>
                     </div>
                   </mat-list-item>

@@ -9,6 +9,8 @@ import { environment } from '../../../environments/environment';
 import * as _ from "lodash";
 import { MatDialog } from '@angular/material';
 import { ModalComponent } from './modal/modal.component';
+import { UsuarioServico } from 'src/app/servicos/usuario.servico';
+import { UsuarioModelo } from 'src/app/modelos/user.modelo';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -25,6 +27,7 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
   usuarioId: string;
   deviceIdMqtt: string;
   statusSolicitado: boolean;
+  usuarioLogado: UsuarioModelo;
 
   private subscription: Subscription;
   public objetoRecebido: DeviceModelo;
@@ -33,19 +36,31 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private _mqttService: MqttService,
     private deviceServico: DeviceService,
+    public usuarioService: UsuarioServico
   ) {
     this.statusSolicitado = false;
 
     this.listaDevices = [];
 
+    this.usuarioLogado = EntityFactoryService.create(UsuarioModelo);
+    this.usuarioId = environment.usuarioId;
+
     this.escutaTopico("FREEDOM/RESPOSTA/GETALL/ANGULAR");
+
   }
 
   ngOnInit() {
-    this.usuarioId = environment.usuarioId;
+
+    this.getUsuarioLogado();
+    console.log(this.usuarioLogado);
+    this.escutaTopico("FREEDOM/RESPOSTA/GETALL/ANGULAR/" + `${this.usuarioLogado.empresaId}`);
+    this.publicaEmTopico("DEVICE/GETALLPOREMPRESAID/" + `${this.usuarioLogado.empresaId}`, '');
   }
 
-
+  getUsuarioLogado() {
+    this.usuarioLogado = this.usuarioService.getUsuarioPorId(this.usuarioId);
+    console.log("Usuário logado: ", this.usuarioLogado)
+  }
 
   ligaDesligaDevice(device: FreedomBoard, status: any) {
     let i: number;
@@ -94,6 +109,7 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
     if (objeto.tipo == 'FB01') {
       for (i = 0; i < this.listaDevices.length; i++) {
         if (this.listaDevices[i].id == objeto.id) {
+          this.listaDevices[i].empresaId = objeto.empresaId;
           this.listaDevices[i].tipo = objeto.tipo;
           this.listaDevices[i].ledPlaca = objeto.ledPlaca;
           this.listaDevices[i].nome = objeto.nome;
@@ -115,6 +131,7 @@ export class TelaInicialComponent implements OnInit, OnDestroy {
     if (objeto.tipo == 'S1R') {
       for (i = 0; i < this.listaDevices.length; i++) {
         if (this.listaDevices[i].id == objeto.id) {
+          this.listaDevices[i].empresaId = objeto.empresaId;
           this.listaDevices[i].tipo = objeto.tipo;
           this.listaDevices[i].statusLedPlaca = objeto.statusLedPlaca;
           this.listaDevices[i].nome = objeto.nome;

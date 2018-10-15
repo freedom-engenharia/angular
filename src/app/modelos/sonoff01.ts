@@ -13,5 +13,6 @@ export class Sonoff01 extends DeviceModelo {
         this.topicoMQTTResposta ? entity.topicoMQTTResposta: '';
         this.topicoMQTTEscutaGetAll ? entity.topicoMQTTEscutaGetAll: '';
         this.topicoMQTTEscutaUpdate ? entity.topicoMQTTEscutaUpdate: '';
+        this.empresaId ? entity.empresaId: '';
     }
 }

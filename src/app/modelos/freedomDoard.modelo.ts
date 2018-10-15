@@ -20,5 +20,6 @@ export class FreedomBoard extends DeviceModelo {
         this.statusRele04 ? entity.statusRele04 : 0;
         this.sensor01 ? entity.sensor01 : [];
         this.topicoMQTTEscutaUpdate ? entity.topicoMQTTEscutaUpdate : '';
+        this.empresaId ? entity.empresaId: '';
     }
 }

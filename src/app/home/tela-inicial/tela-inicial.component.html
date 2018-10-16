@@ -58,9 +58,9 @@
                     <div class="col-6 text-center">
                       <div style="width: 100%">
                         <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="on" *ngIf="item.ledPlaca == 0"
-                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.ledPlaca = 1)">Ligado</button>
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.ledPlaca = 0)">Ligado</button>
                         <button [disabled]="item.tipo == 'FB01UPDATE'" mat-button id="off" *ngIf="item.ledPlaca == 1"
-                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.ledPlaca = 0)">Desligado</button>
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.ledPlaca = 1)">Desligado</button>
                       </div>
                     </div>
                   </mat-list-item>
@@ -180,6 +180,11 @@
                   </mat-list-item>
                 </span>
 
+
+
+
+
+                
                 <span *ngIf="item.tipo == 'S1R' || item.tipo == 'S1RUPDATE'">
                   <br>
                   <mat-list-item>
@@ -188,12 +193,12 @@
                     </div>
                     <div class="col-2">
                       <div style="width: 100%">
-                        <span *ngIf="item.statusRele == 0 " style="width: 40px;">
+                        <span *ngIf="item.statusRele == 1 " style="width: 40px;">
                           <i class="material-icons" style="color:rgba(39, 199, 33, 0.856)">
                             flash_on
                           </i>
                         </span>
-                        <span *ngIf="item.statusRele == 1 ">
+                        <span *ngIf="item.statusRele == 0 ">
                           <i class="material-icons" style="color: dimgray">
                             flash_off
                           </i>
@@ -202,10 +207,10 @@
                     </div>
                     <div class="col-6 text-center">
                       <div style="width: 100%">
-                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="on" *ngIf="item.statusRele == 0"
-                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 1)">Ligado</button>
-                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="off" *ngIf="item.statusRele == 1"
-                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 0)">Desligado</button>
+                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="on" *ngIf="item.statusRele == 1"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 0)">Ligado</button>
+                        <button [disabled]="item.tipo == 'S1RUPDATE'" mat-button id="off" *ngIf="item.statusRele == 0"
+                          (click)="ligaDesligaDevice(objetoUpdate = item, objetoUpdate.statusRele = 1)">Desligado</button>
                       </div>
                     </div>
                   </mat-list-item>

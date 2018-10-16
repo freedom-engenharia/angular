@@ -20,7 +20,6 @@ import { UsuarioModelo } from 'src/app/modelos/user.modelo';
 export class TelaInicialComponent implements OnInit, OnDestroy {
 
   listaDevices: any[]
-  freedomBoardModel: FreedomBoard;
   objetoUpdate: any;
   deviceSelecionado: DeviceModelo;
   devices: DeviceModelo[];

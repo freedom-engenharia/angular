@@ -12,6 +12,7 @@ import { ModalComponent } from './modal/modal.component';
 import { UsuarioServico } from 'src/app/servicos/usuario.servico';
 import { UsuarioModelo } from 'src/app/modelos/user.modelo';
 
+
 @Component({
   selector: 'app-tela-inicial',
   templateUrl: './tela-inicial.component.html',

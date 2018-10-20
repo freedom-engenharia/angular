@@ -21,7 +21,14 @@ export class UsuarioServico {
                 senha: "carlos",
                 id: "02",
                 empresaId: "3606c707-3382-4ced-93ab-b46b3b9acf08"
-            }
+            },
+            {
+                nome: 'Rafael Vieira',
+                email: "rafael.989750000@gmail.com",
+                senha: "123456",
+                id: "03",
+                empresaId: "afa9db09-bc23-4d5b-abac-cd00d3c4947e"
+            },
         ]
 
     }

@@ -19,9 +19,11 @@ import { DeviceService } from './servicos/device.servico';
 import { EntityFactoryService } from './servicos/entity-factory.service';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: 'broker.hivemq.com',
-  protocol: 'ws',
-  port: 8000,
+  hostname: 'm15.cloudmqtt.com',
+  protocol: 'wss',
+  username: 'furlrflv',
+  password: '-gw86XzHfVQu',
+  port: 34076,
   path: '/mqtt'
 };
 

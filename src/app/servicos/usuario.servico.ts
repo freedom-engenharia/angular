@@ -9,6 +9,13 @@ export class UsuarioServico {
 
         this.usuarios = [
             {
+                nome: 'Casa Rodrigues',
+                email: "casarodrigues",
+                senha: "20182018",
+                id: "00",
+                empresaId: "3606c707-3382-4ced-93ab-b46b3b9acf08"
+            },
+            {
                 nome: 'Carlos Samuel',
                 email: "samuel4rodrigues@gmail.com",
                 senha: "samuel",
